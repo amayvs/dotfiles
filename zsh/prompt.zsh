@@ -59,9 +59,9 @@ ruby_version() {
 }
 
 rb_prompt() {
-  if ! [[ -z "$(ruby_version)" ]]
+  if ! [[ -z "$(ruby_version)" ]] && [[ $(ruby_version) != "system" ]]
   then
-    echo "%{$fg[yellow]%}$(ruby_version)%{$reset_color%} "
+    echo "%{$fg[yellow]%}$(ruby_version)%{$reset_color%} in "
   else
     echo ""
   fi
@@ -71,7 +71,7 @@ directory_path() {
   echo "%{$fg[cyan]%}%~%{$reset_color%}"
 }
 
-export PROMPT=$'\n$(rb_prompt)in $(directory_path) $(git_dirty)$(need_push)\n› '
+export PROMPT=$'\n$(rb_prompt)$(directory_path) $(git_dirty)$(need_push)\n› '
 set_prompt () {
   export RPROMPT="%{$fg[cyan]%}%{$reset_color%}"
 }
